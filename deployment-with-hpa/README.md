@@ -53,11 +53,11 @@ spec:
       cpu_average_utilization: 80
 ```
 
-Min/Max have defaults, and if you do not enter the values, the defaults are taken.
+Min/Max/Avg Utilization have defaults, and if you do not enter the values, the defaults are taken. (meaning you can enter 1, all 3, or none)
 
 
 If you do not want to use CPU, you can provide your own metrics block. (sample pulled from k8s doc)
-If you provide the metrics in the param, the default of CPU will not be added and it is on you to add that back in if you want it.
+If you provide the metrics in the param, the default of CPU will not be added and it is on you to add that back in if you want it. You cannot use `cpu_average_utilization` in addition to `metrics`, it will error and let you know one or the other.
 
 ```yaml
   params:
