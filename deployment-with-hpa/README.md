@@ -1,5 +1,4 @@
-This custom workload type 'autoscaling-server' is the same as the existing workload type 'server' with an added HorizontalPodAutoscaler CR
-
+This custom workload type 'autoscaling-server' is the same as the existing workload type 'server' with an added HorizontalPodAutoscaler CR and Kapp Config to allow the changes the autoscaler makes to the replica count to stay and not be reverted.
 
 This new workload type has support for min and max replicas using CPU scaling by default and allows configuration through a parameter called 'autoscaling'. Outside of min/max replicas and CPU..you can set your own metrics config to override the default CPU metrics usage.
 
