@@ -1,0 +1,39 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: ss-friday-java-web-app
+  labels:
+    apps.tanzu.vmware.com/workload-type: statefulset
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    app.kubernetes.io/part-of: ss-friday-java-web-app
+spec:
+  build:
+    env:
+      - name: BP_JVM_VERSION
+        value: "11"
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+  - name: replicas
+    value: 3
+  - name: volumeclaimtemplate
+    value: 
+      - metadata:
+          name: www
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 8Gi
+        storageClassName: default
+  - name: volumemounts
+    value:
+      - name: www
+        mountPath: /usr/share/nginx/html
+  source:
+    git:
+      url: https://github.com/x95castle1/friday-java-web-app
+      ref:
+        branch: main
